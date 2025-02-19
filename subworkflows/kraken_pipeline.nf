@@ -15,7 +15,7 @@ OPTIONAL_FILE = file("$projectDir/data/OPTIONAL_FILE")
 process run_kraken2 {
     label 'wfmetagenomics'
     tag "${meta.alias}"
-    publishDir "${params.out_dir}/kraken2", mode: 'copy', pattern: "*kraken2.report.txt*"
+    publishDir "${params.out_dir}/kraken2", mode: 'copy'
     cpus params.threads
     // Set the memory required to the size of the database + 4GB overhead.
     memory {
