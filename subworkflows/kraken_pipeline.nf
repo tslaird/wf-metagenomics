@@ -34,8 +34,7 @@ process run_kraken2 {
         path kraken_db
         val hash_size
     output:
-        tuple val(meta), path("${meta.alias}.kraken2.report.txt"), path("${meta.alias}.kraken2.assignments.tsv"), emit: kraken2_reports
-        tuple val(meta), path("${meta.alias}.kraken2.unclassified"), emit: kraken2_unclassified
+        tuple val(meta), path("${meta.alias}.kraken2.report.txt"), path("${meta.alias}.kraken2.assignments.tsv"), path("${meta.alias}.kraken2.unclassified"), emit: kraken2_reports
     script:
         def sample_id = "${meta.alias}"
         def memory_mapping = params.kraken2_memory_mapping ? '--memory-mapping' : ''
