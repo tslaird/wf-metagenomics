@@ -199,7 +199,7 @@ workflow kraken_pipeline {
         // Find out size of the db. Cannot be done within the process
         database_main_file_size = database.resolve('hash.k2d').size()
         kraken2_output = run_kraken2(samples, database, database_main_file_size)
-        kraken2_output = kraken2_output.out.kraken2_reports
+        kraken2_output = kraken2_output.kraken2_reports
 
         // Run bracken
         bracken_reports = run_bracken(kraken2_output, database, taxonomy, bracken_length, taxonomic_rank)
