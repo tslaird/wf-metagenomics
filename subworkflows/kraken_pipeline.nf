@@ -198,11 +198,11 @@ workflow kraken_pipeline {
         // Run Kraken2
         // Find out size of the db. Cannot be done within the process
         database_main_file_size = database.resolve('hash.k2d').size()
-        kraken2_output = run_kraken2(samples, database, database_main_file_size)
-        kraken2_output = kraken2_output.kraken2_reports
+        kraken2_reports = run_kraken2(samples, database, database_main_file_size)
 
         // Run bracken
-        bracken_reports = run_bracken(kraken2_output, database, taxonomy, bracken_length, taxonomic_rank)
+        kraken2_reports = kraken2_reports.map{ it -> it[0,1,2]}
+        bracken_reports = run_bracken(kraken2_reports, database, taxonomy, bracken_length, taxonomic_rank)
         lineages = bracken_reports.bracken_json
         // Update meta with unclassified
         samples_classification = lineages.map { meta, lineages_json, n_unclassified->
